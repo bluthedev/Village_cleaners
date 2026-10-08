@@ -1,5 +1,5 @@
 import React from 'react';
-import { Sparkles, Phone, MapPin, Clock, Heart, ExternalLink, Calendar } from 'lucide-react';
+import { Sparkles, Phone, MapPin, Clock, Calendar } from 'lucide-react';
 import { PageId } from './Navbar';
 
 interface FooterProps {
@@ -14,20 +14,20 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickup }) => {
   };
 
   return (
-    <footer className="bg-village-dark text-slate-300 pt-16 pb-12 border-t-2 border-slate-800">
+    <footer className="bg-village-dark text-slate-300 pt-16 pb-12 border-t border-slate-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
           {/* Brand Info */}
           <div className="lg:col-span-2 space-y-4">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-2xl bg-village-blue flex items-center justify-center text-white shadow-md">
+              <div className="w-10 h-10 rounded-2xl bg-village-blue flex items-center justify-center text-white shadow-sm">
                 <Sparkles className="w-5 h-5 text-village-sky" />
               </div>
               <div>
-                <span className="font-display font-black text-xl text-white tracking-tight">
+                <span className="font-bold text-xl text-white tracking-tight">
                   VILLAGE <span className="text-village-sky">CLEANERS</span>
                 </span>
-                <div className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
+                <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">
                   Rice Village • Houston, Texas
                 </div>
               </div>
@@ -40,7 +40,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickup }) => {
             <div className="pt-2">
               <button
                 onClick={onOpenPickup}
-                className="px-5 py-2.5 rounded-xl bg-village-blue hover:bg-village-blueHover text-white font-extrabold text-xs shadow-md transition flex items-center gap-1.5"
+                className="px-5 py-2.5 rounded-xl bg-village-blue hover:bg-village-blueHover text-white font-bold text-xs shadow-sm transition flex items-center gap-1.5"
               >
                 <Calendar className="w-3.5 h-3.5" />
                 <span>Schedule Free Pickup</span>
@@ -50,7 +50,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickup }) => {
 
           {/* Service Links */}
           <div className="space-y-3">
-            <h4 className="font-display font-extrabold text-white text-sm uppercase tracking-wider">Garment Care</h4>
+            <h4 className="font-bold text-white text-sm uppercase tracking-wider">Garment Care</h4>
             <ul className="space-y-2 text-xs text-slate-300">
               <li>
                 <button onClick={() => handlePageClick('services')} className="hover:text-white transition text-left">
@@ -64,7 +64,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickup }) => {
               </li>
               <li>
                 <button onClick={() => handlePageClick('services')} className="hover:text-white transition text-left">
-                  Master Alterations & Tailoring
+                  Master Tailoring & Alterations
                 </button>
               </li>
               <li>
@@ -82,31 +82,36 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickup }) => {
 
           {/* Quick Page Links */}
           <div className="space-y-3">
-            <h4 className="font-display font-extrabold text-white text-sm uppercase tracking-wider">Quick Pages</h4>
+            <h4 className="font-bold text-white text-sm uppercase tracking-wider">Navigation</h4>
             <ul className="space-y-2 text-xs text-slate-300">
               <li>
                 <button onClick={() => handlePageClick('home')} className="hover:text-white transition text-left">
-                  Home (2D Wash Sim)
+                  Home
+                </button>
+              </li>
+              <li>
+                <button onClick={() => handlePageClick('services')} className="hover:text-white transition text-left">
+                  Services
                 </button>
               </li>
               <li>
                 <button onClick={() => handlePageClick('pricing')} className="hover:text-white transition text-left">
-                  Pricing Estimator
+                  Price Estimator
                 </button>
               </li>
               <li>
-                <button onClick={() => handlePageClick('stain-lab')} className="hover:text-white transition text-left">
-                  Stain Removal Lab
+                <button onClick={() => handlePageClick('plans')} className="hover:text-white transition text-left font-bold text-village-sky">
+                  Monthly Subscription Plans
                 </button>
               </li>
               <li>
                 <button onClick={() => handlePageClick('reviews')} className="hover:text-white transition text-left">
-                  Google Reviews (4.5★)
+                  Customer Reviews (4.5★)
                 </button>
               </li>
               <li>
                 <button onClick={() => handlePageClick('location')} className="hover:text-white transition text-left">
-                  Store Hours & Driving Route
+                  Store Hours & Directions
                 </button>
               </li>
             </ul>
@@ -114,7 +119,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickup }) => {
 
           {/* Store Hours & Contact */}
           <div className="space-y-3">
-            <h4 className="font-display font-extrabold text-white text-sm uppercase tracking-wider">Store Visit</h4>
+            <h4 className="font-bold text-white text-sm uppercase tracking-wider">Store Visit</h4>
             <div className="space-y-2 text-xs text-slate-300">
               <div className="flex items-start gap-2">
                 <MapPin className="w-4 h-4 text-village-sky shrink-0 mt-0.5" />
@@ -144,7 +149,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate, onOpenPickup }) => {
             © {new Date().getFullYear()} Village Cleaners Houston. All rights reserved.
           </div>
           <div className="flex items-center gap-1 text-slate-400">
-            <span>Crafted with pride for</span>
+            <span>Serving</span>
             <span className="text-white font-bold">Rice Village & West University Place</span>
           </div>
         </div>

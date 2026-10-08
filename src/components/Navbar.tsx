@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Phone, MapPin, Calendar, Menu, X, Sparkles, ChevronRight } from 'lucide-react';
+import { Phone, MapPin, Calendar, Menu, X, Sparkles } from 'lucide-react';
 
-export type PageId = 'home' | 'services' | 'pricing' | 'stain-lab' | 'reviews' | 'location';
+export type PageId = 'home' | 'services' | 'pricing' | 'plans' | 'reviews' | 'location';
 
 interface NavbarProps {
   currentPage: PageId;
@@ -11,7 +11,6 @@ interface NavbarProps {
 
 export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenPickup }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const [isOpenNow, setIsOpenNow] = useState(true);
   const [statusText, setStatusText] = useState('Open Today until 5:00 PM');
 
@@ -64,19 +63,11 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 15);
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   const navLinks: Array<{ id: PageId; label: string; badge?: string }> = [
     { id: 'home', label: 'Home' },
     { id: 'services', label: 'Services' },
     { id: 'pricing', label: 'Pricing Estimator' },
-    { id: 'stain-lab', label: 'Stain Lab', badge: 'Results' },
+    { id: 'plans', label: 'Monthly Plans', badge: 'Save' },
     { id: 'reviews', label: 'Reviews' },
     { id: 'location', label: 'Hours & Location' },
   ];
@@ -88,35 +79,35 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full transition-all duration-300">
-      {/* Top Notification / Trust Bar */}
-      <div className="bg-village-navy text-slate-200 text-xs py-2 px-4 sm:px-6 border-b border-village-navyLight/70">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
+    <header className="sticky top-0 z-40 w-full bg-white border-b border-slate-200">
+      {/* Top Status Bar */}
+      <div className="bg-village-navy text-slate-300 text-xs py-2.5 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-3">
           {/* Address & Status Pill */}
           <div className="flex items-center gap-4 flex-wrap">
             <button
               onClick={() => handleLinkClick('location')}
-              className="flex items-center gap-1.5 hover:text-white transition text-slate-300 font-semibold text-left"
+              className="flex items-center gap-1.5 hover:text-white transition text-slate-300 font-medium text-left"
             >
               <MapPin className="w-3.5 h-3.5 text-village-sky shrink-0" />
               <span>2366 Rice Blvd, Suite D, Houston, TX 77005 (Rice Village)</span>
             </button>
 
-            <div className="hidden md:flex items-center gap-1.5 bg-slate-900/60 px-2.5 py-0.5 rounded-full border border-slate-700">
-              <span className={`w-2 h-2 rounded-full ${isOpenNow ? 'bg-emerald-400 animate-pulse' : 'bg-amber-400'}`} />
+            <div className="hidden md:flex items-center gap-1.5 bg-slate-800/80 px-2.5 py-0.5 rounded-full border border-slate-700">
+              <span className={`w-2 h-2 rounded-full ${isOpenNow ? 'bg-emerald-400' : 'bg-amber-400'}`} />
               <span className="font-semibold text-white text-[11px]">{statusText}</span>
             </div>
           </div>
 
-          {/* Contact & Google Rating badge */}
-          <div className="flex items-center gap-4">
+          {/* Phone & Rating */}
+          <div className="flex items-center gap-5">
             <div className="hidden sm:flex items-center gap-1 text-village-gold font-bold">
               <span>★ 4.5</span>
-              <span className="text-slate-300 font-medium">(140+ Google Reviews)</span>
+              <span className="text-slate-300 font-normal">(140+ Google Reviews)</span>
             </div>
             <a
               href="tel:7132778770"
-              className="flex items-center gap-1.5 text-white font-extrabold hover:text-village-sky transition"
+              className="flex items-center gap-1.5 text-white font-bold hover:text-village-sky transition"
             >
               <Phone className="w-3.5 h-3.5 text-village-sky" />
               <span>(713) 277-8770</span>
@@ -126,34 +117,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
       </div>
 
       {/* Main Navigation Bar */}
-      <nav
-        className={`w-full px-4 sm:px-8 py-3.5 transition-all duration-300 ${
-          isScrolled
-            ? 'bg-white/98 backdrop-blur-md shadow-clean border-b-2 border-slate-200'
-            : 'bg-white border-b-2 border-slate-200/80'
-        }`}
-      >
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          {/* Brand Logo */}
+      <nav className="max-w-7xl mx-auto px-4 sm:px-8 py-4">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
           <button
             onClick={() => handleLinkClick('home')}
-            className="flex items-center gap-3 group text-left"
+            className="flex items-center gap-3 text-left group"
           >
-            <div className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-gradient-to-tr from-village-navy via-village-navy to-village-blue flex items-center justify-center text-white shadow-md group-hover:scale-105 transition-transform">
+            <div className="w-10 h-10 rounded-xl bg-village-navy flex items-center justify-center text-white shadow-sm">
               <Sparkles className="w-5 h-5 text-village-sky" />
             </div>
             <div>
-              <div className="font-display font-black text-xl sm:text-2xl text-slate-950 tracking-tight leading-none flex items-center gap-1.5">
+              <div className="font-bold text-xl text-village-navy tracking-tight leading-none">
                 VILLAGE <span className="text-village-blue">CLEANERS</span>
               </div>
-              <div className="text-[10px] sm:text-[11px] font-extrabold tracking-wider uppercase text-slate-600 mt-0.5">
-                Rice Village • Houston, TX
+              <div className="text-[10px] font-semibold tracking-wider uppercase text-slate-500 mt-1">
+                Rice Village • Houston
               </div>
             </div>
           </button>
 
-          {/* Desktop Nav Links */}
-          <div className="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-extrabold text-slate-700">
+          {/* Desktop Links */}
+          <div className="hidden lg:flex items-center gap-2 text-sm font-semibold text-slate-600">
             {navLinks.map((link) => {
               const isActive = currentPage === link.id;
               return (
@@ -162,15 +147,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
                   onClick={() => handleLinkClick(link.id)}
                   className={`px-3.5 py-2 rounded-xl transition flex items-center gap-1.5 ${
                     isActive
-                      ? 'bg-village-navy text-white shadow-sm'
-                      : 'text-slate-700 hover:text-slate-950 hover:bg-slate-100'
+                      ? 'bg-slate-100 text-village-navy font-bold'
+                      : 'hover:text-village-navy hover:bg-slate-50'
                   }`}
                 >
                   <span>{link.label}</span>
                   {link.badge && (
-                    <span className={`px-1.5 py-0.2 rounded-full text-[9px] font-black uppercase ${
-                      isActive ? 'bg-sky-400 text-village-navy' : 'bg-sky-100 text-village-blue'
-                    }`}>
+                    <span className="px-1.5 py-0.2 rounded-full text-[9px] font-extrabold uppercase bg-emerald-100 text-emerald-800">
                       {link.badge}
                     </span>
                   )}
@@ -179,28 +162,28 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
             })}
           </div>
 
-          {/* Action CTAs */}
+          {/* Action Button */}
           <div className="hidden sm:flex items-center gap-3">
             <a
               href="tel:7132778770"
-              className="px-3.5 py-2 text-xs font-black text-slate-800 hover:text-village-blue transition hidden md:block"
+              className="px-3.5 py-2 text-xs font-bold text-slate-700 hover:text-village-navy transition hidden md:block"
             >
               Call Us
             </a>
             <button
               onClick={onOpenPickup}
-              className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-village-blue hover:bg-village-blueHover text-white text-xs sm:text-sm font-extrabold shadow-md hover:shadow-glow transition-all transform hover:-translate-y-0.5"
+              className="flex items-center gap-2 px-5 py-2.5 rounded-xl bg-village-blue hover:bg-village-blueHover text-white text-xs sm:text-sm font-bold shadow-sm transition"
             >
               <Calendar className="w-4 h-4" />
               <span>Schedule Pickup</span>
             </button>
           </div>
 
-          {/* Mobile Menu Toggle Button */}
+          {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 rounded-xl text-slate-800 hover:bg-slate-100 transition"
-            aria-label="Toggle Navigation"
+            className="lg:hidden p-2 rounded-xl text-slate-700 hover:bg-slate-100 transition"
+            aria-label="Toggle navigation"
           >
             {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
@@ -208,22 +191,22 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
 
         {/* Mobile Dropdown Menu */}
         {mobileMenuOpen && (
-          <div className="lg:hidden mt-3 pt-3 border-t-2 border-slate-200 space-y-1.5 animate-in fade-in duration-200">
+          <div className="lg:hidden mt-3 pt-3 border-t border-slate-200 space-y-1.5">
             {navLinks.map((link) => {
               const isActive = currentPage === link.id;
               return (
                 <button
                   key={link.id}
                   onClick={() => handleLinkClick(link.id)}
-                  className={`w-full text-left px-4 py-2.5 rounded-xl font-bold text-sm transition flex items-center justify-between ${
+                  className={`w-full text-left px-4 py-2.5 rounded-xl font-semibold text-sm transition flex items-center justify-between ${
                     isActive
-                      ? 'bg-village-navy text-white'
-                      : 'text-slate-800 hover:bg-slate-100'
+                      ? 'bg-slate-100 text-village-navy font-bold'
+                      : 'text-slate-700 hover:bg-slate-50'
                   }`}
                 >
                   <span>{link.label}</span>
                   {link.badge && (
-                    <span className="px-1.5 py-0.5 rounded text-[10px] font-bold bg-sky-100 text-village-blue">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-100 text-emerald-800">
                       {link.badge}
                     </span>
                   )}
@@ -237,13 +220,13 @@ export const Navbar: React.FC<NavbarProps> = ({ currentPage, onNavigate, onOpenP
                   setMobileMenuOpen(false);
                   onOpenPickup();
                 }}
-                className="w-full py-3 rounded-xl bg-village-blue text-white text-center font-extrabold text-sm shadow-md"
+                className="w-full py-3 rounded-xl bg-village-blue text-white text-center font-bold text-sm shadow-sm"
               >
                 Schedule Pickup / Delivery
               </button>
               <a
                 href="tel:7132778770"
-                className="w-full py-2.5 rounded-xl border border-slate-300 text-slate-900 text-center font-extrabold text-sm bg-white"
+                className="w-full py-2.5 rounded-xl border border-slate-300 text-slate-800 text-center font-bold text-sm bg-white"
               >
                 Call (713) 277-8770
               </a>

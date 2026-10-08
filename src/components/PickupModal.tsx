@@ -11,9 +11,13 @@ interface PickupModalProps {
     details: string;
     readyDate: string;
   } | null;
+  initialPlan?: {
+    name: string;
+    price: number;
+  } | null;
 }
 
-export const PickupModal: React.FC<PickupModalProps> = ({ isOpen, onClose, initialEstimate }) => {
+export const PickupModal: React.FC<PickupModalProps> = ({ isOpen, onClose, initialEstimate, initialPlan }) => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
   const [address, setAddress] = useState('');
@@ -153,6 +157,21 @@ export const PickupModal: React.FC<PickupModalProps> = ({ isOpen, onClose, initi
                   </div>
                   <span className="font-bold text-village-blue text-[11px] bg-white px-2.5 py-1 rounded-full border border-sky-100">
                     Est. Ready: {initialEstimate.readyDate.split(',')[0]}
+                  </span>
+                </div>
+              )}
+
+              {/* Optional Plan Subscription banner */}
+              {initialPlan && (
+                <div className="p-3.5 rounded-2xl bg-emerald-50 border border-emerald-200 text-xs flex items-center justify-between">
+                  <div className="flex items-center gap-2 text-emerald-950">
+                    <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
+                    <span>
+                      Selected Membership: <span className="font-bold">{initialPlan.name}</span> (${initialPlan.price}/mo)
+                    </span>
+                  </div>
+                  <span className="font-bold text-emerald-800 text-[11px] bg-white px-2.5 py-1 rounded-full border border-emerald-200">
+                    1st Pickup Free
                   </span>
                 </div>
               )}
