@@ -32,7 +32,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Fluff & Fold Wash Laundry',
     subtitle: 'Daily essentials sorted, washed, and crisp-folded',
     badge: 'Popular for Busy Locals',
-    image: '/images/storefront.jpg',
+    image: '/images/wash_and_fold.jpg',
     turnaround: 'Same-Day (by 10 AM)',
     basePrice: '$1.85 / lb (10 lb min)',
     features: [
@@ -64,7 +64,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Duvets, Comforters & Home Linens',
     subtitle: 'Commercial high-capacity sanitizing wash',
     badge: 'Allergen Removal',
-    image: '/images/dry_cleaning.jpg',
+    image: '/images/linens.jpg',
     turnaround: '48 Hours',
     basePrice: 'From $28.00 / piece',
     features: [
@@ -80,7 +80,7 @@ export const servicesData: ServiceItem[] = [
     title: 'Self-Service Smart Laundromat',
     subtitle: 'Dexter high-efficiency commercial equipment',
     badge: 'Dexter Pay App Ready',
-    image: '/images/storefront.jpg',
+    image: '/images/laundromat.jpg',
     turnaround: 'In & Out in 45 Min',
     basePrice: '$3.50 – $7.50 / load',
     features: [

@@ -159,7 +159,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onOpenPickup, onNavigate, on
             <div className="rounded-3xl border border-slate-200 overflow-hidden bg-white shadow-clean hover:shadow-card transition flex flex-col justify-between">
               <div>
                 <img
-                  src="/images/storefront.jpg"
+                  src="/images/wash_and_fold.jpg"
                   alt="Wash and Fold"
                   className="w-full h-56 object-cover"
                 />
